@@ -217,7 +217,7 @@ The finding is not a valid problem.
 
 No corrective implementation or artifact change is required.
 
-### 7.2 Finding Accepted — No Corrective Change Required
+### 7.2 Finding Accepted — No Plan Change Required
 
 The finding is valid, but no change to a governed artifact is required.
 
@@ -532,6 +532,14 @@ Do not invent missing requirements, implementation decisions, or approval decisi
 ## 17. Required Decision Report
 
 The final report must contain the fields below with applicability determined by subject type. For FINDING, report the finding fields as finding-specific and the plan fields according to actual plan applicability. For HUMAN-REQUESTED GOVERNANCE ENHANCEMENT (NON-FINDING), do not report or imply a finding disposition; identify the enhancement request in the Investigation Result instead of a Finding Summary, and mark Finding Summary as not applicable. Mark Plan Change Required, Plan Impact, and Proposed Plan Amendment not applicable unless an applicable approved Implementation Plan is established; never invent a finding, Requirement, or approved Plan to fill these fields.
+
+### Procedural Non-Mutation Assurance Disclosure
+
+For every FINDING or HUMAN-REQUESTED GOVERNANCE ENHANCEMENT (NON-FINDING) whose corrective decision proposes changing a governance artifact, the exact canonical decision report must include the following disclosure before it is submitted for Human Approval. Include it even when the future Verification/Review assurance mode is not yet known; the statement is conditional on procedural assurance being used. A separate issue comment, Application report, Verification report, Review report, or other linked record does not substitute for disclosure in the exact proposal.
+
+> If Independent Governance Verification or Review uses procedural non-mutation assurance, matching endpoint fingerprints cannot prove the absence of transient writes or same-principal tampering. This assurance is procedural; it does not establish enforced read-only access, equivalent prevention, or guaranteed security. This statement is disclosure, not a separate risk-acceptance gate.
+
+Before requesting Human Approval, the proposal preparer must confirm that this disclosure is present in the canonical report. If it is missing, do not submit the proposal for approval; complete or supersede the proposal under the applicable process first.
 
 ### 1. Decision Status
 

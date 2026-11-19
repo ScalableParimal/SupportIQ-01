@@ -30,6 +30,8 @@ Observed Evidence:
 
 Additional Context:
 [Any additional information relevant to the decision]
+
+Governance Amendment Disclosure (required for a proposed governance-artifact change in either subject route): [identify the canonical report section containing the exact disclosure required by the Corrective Change Guideline; confirm it is present before Human Approval; this is disclosure, not a separate risk-acceptance gate]
 The Finding fields above are not applicable to a non-finding enhancement. Never substitute enhancement provenance or proposal authorization for Human Approval of the exact change.
 
 ## Work Item Context (product work)

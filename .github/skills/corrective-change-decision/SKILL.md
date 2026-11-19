@@ -131,6 +131,8 @@ If the affected artifact is not the Requirement or Implementation Plan:
 
 The current approved Implementation Plan remains authoritative unless the corrective decision explicitly determines that it must change.
 
+For every proposed governance amendment, whether finding-led or enhancement-led, verify before proposal handoff that the canonical report contains the exact Procedural Non-Mutation Assurance Disclosure required by the Corrective Change Guideline. Include it even if the future Verification/Review assurance mode is not yet known. An issue comment or downstream report does not substitute. If it is missing, do not request Human Approval; complete or supersede the proposal first. This disclosure is not a separate risk-acceptance gate.
+
 ## 9. Requirement Change Boundary
 
 If the corrective decision determines that the Requirement must change:

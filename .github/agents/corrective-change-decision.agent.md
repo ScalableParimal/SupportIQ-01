@@ -77,6 +77,8 @@ For a governance enhancement, publish only the exact proposal in the actor-owned
 
 The restrictions in this section do not prohibit publication of this process's own governed output records. Follow section 33.1 of SDLC_ARTIFACT_GOVERNANCE.md and section 30.1 of SDLC_TRACEABILITY_AND_CHANGE_CONTROL.md within the explicitly designated record scope. This limited permission covers the process's own invocation metadata, checkpoints, required report, result bindings, and permitted evidence or gate records; it does not permit changes to approved upstream artifacts, another process's records, or substantive human decisions. Published final records must not be edited in place. Establish required execution context before starting and publish the terminal record only when its recorded termination or completion is established. All other write, process, independence, approval, and acceptance restrictions remain in force.
 
+Before proposing any governance-artifact correction, for either FINDING or HUMAN-REQUESTED GOVERNANCE ENHANCEMENT (NON-FINDING), include the exact Procedural Non-Mutation Assurance Disclosure required by the Corrective Change Guideline in the canonical report before Human Approval. Include it even if the future Verification/Review assurance mode is not yet known; a separate issue comment or downstream report does not substitute. If the disclosure is missing, do not hand off the proposal for approval. It is disclosure, not a separate risk-acceptance gate.
+
 ## Human Approval Boundary
 
 The Agent may determine and report that human approval is required.
