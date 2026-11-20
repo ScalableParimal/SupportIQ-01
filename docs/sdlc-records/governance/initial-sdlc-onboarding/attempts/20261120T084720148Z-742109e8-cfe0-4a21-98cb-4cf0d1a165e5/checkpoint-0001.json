@@ -1,0 +1,29 @@
+{
+    "schema_version":  "1.0",
+    "record_type":  "checkpoint",
+    "record_id":  "checkpoint-0001",
+    "work_id":  "initial-sdlc-onboarding",
+    "attempt_id":  "20261120T084720148Z-742109e8-cfe0-4a21-98cb-4cf0d1a165e5",
+    "sequence":  1,
+    "created_at_utc":  "2026-11-20T08:55:22.1379632Z",
+    "clock_basis":  "Windows host UTC system clock sampled during record preparation; not publication time",
+    "last_confirmed_boundary":  "Complete source inventory and review of all 52 core artifacts and eight mechanism source groups",
+    "partial_outputs":  [
+                            "evidence/source-manifest.json"
+                        ],
+    "source_manifest":  {
+                            "path":  "docs/sdlc-records/governance/initial-sdlc-onboarding/attempts/20261120T084720148Z-742109e8-cfe0-4a21-98cb-4cf0d1a165e5/evidence/source-manifest.json",
+                            "record_id":  "source-manifest:20261120T084720148Z-742109e8-cfe0-4a21-98cb-4cf0d1a165e5",
+                            "sha256":  "7d8b0a668a10abe30ea3643ccbfda8ff212b9e46e0d45f277295ffdc9a5eb4e7"
+                        },
+    "repository_state":  {
+                             "head":  "a4b2a9c9e1807ff7689365fa52bd65eef6803632",
+                             "tracked_source_state":  "initially clean; governance inputs fingerprinted",
+                             "product_artifacts":  "excluded"
+                         },
+    "remaining":  "Prepare and publish canonical audit report, validate evidence references, publish result.json, and verify result bindings",
+    "blockers":  [
+
+                 ],
+    "next_safe_boundary":  "Complete final source fingerprint/path-set check and publish report/result atomically without overwrite"
+}

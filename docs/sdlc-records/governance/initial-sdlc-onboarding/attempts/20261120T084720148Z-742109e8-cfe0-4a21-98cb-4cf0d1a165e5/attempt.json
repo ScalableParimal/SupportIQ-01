@@ -1,0 +1,55 @@
+{
+    "schema_version":  "1.0",
+    "record_type":  "invocation_attempt",
+    "record_id":  "20261120T084720148Z-742109e8-cfe0-4a21-98cb-4cf0d1a165e5",
+    "work_id":  "initial-sdlc-onboarding",
+    "created_at_utc":  "2026-11-20T08:47:20.1486195Z",
+    "clock_basis":  "Windows host UTC system clock sampled during record preparation; not publication time",
+    "canonical_repository":  "ScalableParimal/SupportIQ-01",
+    "repository_remote":  "https://github.com/ScalableParimal/SupportIQ-01.git",
+    "source_commit":  "a4b2a9c9e1807ff7689365fa52bd65eef6803632",
+    "branch":  "SDLC-Process-Onboarding",
+    "worktree_clean":  true,
+    "process":  "SDLC Governance Audit",
+    "actor":  "SDLC Governance Audit Agent",
+    "actor_definition":  ".github/agents/sdlc-governance-audit.agent.md",
+    "actor_definition_sha256":  "66e669a820290d99c398e932f3dfa8848740c26b6abfd07e2294b36116197488",
+    "skill":  ".github/skills/sdlc-governance-audit/SKILL.md",
+    "skill_sha256":  "ae1a8e67cc07e4175af530f7345335efd974f56c8c8d04d68c37ef018ad29704",
+    "requested_scope":  "Complete read-only Governance Audit: three Masters, 52-core catalog, eight separately reported mechanism groups; no product artifact contents, remediation, investigation, or source changes",
+    "authorized_output_scope":  "docs/sdlc-records/governance/initial-sdlc-onboarding/",
+    "authorization":  {
+                          "source":  "GitHub issue comment",
+                          "canonical_issue":  "https://github.com/ScalableParimal/SupportIQ-01/issues/9",
+                          "permalink":  "https://github.com/ScalableParimal/SupportIQ-01/issues/9#issuecomment-7034711986",
+                          "comment_id":  "7034711986",
+                          "author":  "ScalableParimal",
+                          "author_association":  "OWNER",
+                          "created_at_utc":  "2026-11-20T08:44:29Z",
+                          "decision":  "one-time governance-root bootstrap and complete Governance Audit only",
+                          "validation":  "Re-fetched with GitHub issue_read get and get_comments; exact body, comment id, author, association, timestamp and canonical repository matched"
+                      },
+    "master_fingerprints":  {
+                                "docs/ai/sdlc/SDLC_GOVERNANCE.md":  "506f86acf43349ab66b9f41ef855ec8fad47e7ca35b1cabf288fd220deba9cca",
+                                "docs/ai/sdlc/SDLC_TRACEABILITY_AND_CHANGE_CONTROL.md":  "76d0782557e41505e55f7d95c6fb9c1720cb43689ded3718a0bf6a967f3fbb35",
+                                "docs/ai/sdlc/SDLC_ARTIFACT_GOVERNANCE.md":  "59961343fb09926333014599c19e2e12dd3c789d5eb3c4aac2f5d55e64347a19"
+                            },
+    "persistence_root":  "docs/sdlc-records/governance",
+    "predecessor":  null,
+    "runtime_capability":  {
+                               "declared_tools":  [
+                                                      "PowerShell local repository read",
+                                                      "PowerShell SHA-256",
+                                                      "PowerShell local record write",
+                                                      "GitHub issue read"
+                                                  ],
+                               "observed_process_identity":  "INT-SCL-010\\Parimal",
+                               "authenticated_user_sid_present":  true,
+                               "publisher_route":  "Local filesystem under governance records root; ACL grants Authenticated Users Modify; final publication uses same-filesystem .NET File.Move no-overwrite semantics",
+                               "observed_access":  true,
+                               "scope":  "only this actor own attempt/report/result/evidence under the authorized Work ID"
+                           },
+    "status":  "IN_PROGRESS",
+    "result_path":  "docs/sdlc-records/governance/initial-sdlc-onboarding/attempts/20261120T084720148Z-742109e8-cfe0-4a21-98cb-4cf0d1a165e5/result.json",
+    "report_path":  "docs/sdlc-records/governance/initial-sdlc-onboarding/attempts/20261120T084720148Z-742109e8-cfe0-4a21-98cb-4cf0d1a165e5/report.md"
+}
