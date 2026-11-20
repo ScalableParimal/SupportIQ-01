@@ -48,7 +48,7 @@ Use the following sources:
 2. Current approved Implementation Plan
 3. Current repository implementation
 4. Relevant architecture guidelines
-5. Relevant engineering guidelines
+5. Relevant engineering guidelines, including the approved project instructions at `.github/copilot-instructions.md`. These are subordinate to the approved Requirement and Plan, except designated mandatory team rules, which the Plan may only tighten.
 6. Implementation Verification results
 7. Test/build results
 8. Finding Investigation results, if applicable

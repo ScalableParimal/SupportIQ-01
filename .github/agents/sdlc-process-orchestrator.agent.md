@@ -162,6 +162,8 @@ The Orchestrator enters this state when a new feature-development request is rec
 
 Before a new target project begins its first SDLC activity, establish a completed, applicable SDLC Portability Assessment against identified source-framework and target-project baselines. If no applicable assessment is recorded, stop the affected transition and present `.github/agents/portability-assessment.agent.md` as the explicit human-invoked entry point; do not invoke the Assessment Agent automatically. When an assessment recommends a possible blocker, establish that the target-project-authorized human's explicit disposition and rationale are recorded before the first activity. The Orchestrator checks for the required record; it does not decide whether the possible blocker applies. This disposition is not Human Requirement Approval or Human Plan Approval.
 
+After the Portability disposition and before the first Requirement Analysis, establish that Project Instructions Setup Phase 1 is satisfied (O16.6). If it is not, stop the transition and present `.github/agents/project-instructions-setup.agent.md` as the explicit, human-invoked entry point. The Orchestrator does not author, edit, or approve `.github/copilot-instructions.md`, and it does not invoke the Setup Agent automatically.
+
 Before starting Requirement Analysis, the Orchestrator must:
 
 1. establish the feature/work identity;
@@ -306,6 +308,7 @@ The Orchestrator must determine transitions from:
 - repository state;
 - durable execution records;
 - the applicability of the Portability Assessment and any required recorded human disposition.
+- the applicable Project Instructions Setup phase result or recorded waiver (O16.6).
 
 It must not transition merely because an Agent reports "done". Before each affected process transition, determine whether an initial assessment is required or an explicit human request or material change requires reassessment. Apply the Portability Assessment Guideline's evidence-based applicability and affected-dimension reuse rules; do not require unconditional repetition or reuse a conclusion whose scope or inputs are no longer applicable. If the required assessment is absent or inapplicable, stop the affected transition and present the explicit Assessment Agent entry point rather than invoking it. When an applicable assessment recommends a possible blocker, verify that the target-project-authorized human's explicit disposition and rationale are recorded before the first or next affected activity. Do not decide blocker applicability; do not treat this record as Requirement or Plan approval.
 
@@ -337,6 +340,8 @@ The normal lifecycle is:
             ↓
     Human Plan Approval
             ↓
+    Project Instructions Setup — Phase 2 (first Implementation; refresh when triggered; O16.6)
+            ↓
     Implementation
             ↓
     Implementation Self-Check
@@ -352,6 +357,8 @@ The normal lifecycle is:
     Commit / Push
             ↓
     Feature Complete
+
+Project Instructions Setup Phase 1 precedes the first Requirement Analysis (O2.1, O16.6).
 
 The Orchestrator must not skip a mandatory stage.
 
@@ -852,7 +859,8 @@ Required:
 - Requirement Analysis Skill;
 - Requirement Analysis Agent;
 - repository state;
-- feature identity.
+- feature identity;
+- Project Instructions Setup Phase 1 satisfied (`INSTRUCTIONS APPLIED` or recorded waiver) under O16.6.
 
 Postconditions:
 
@@ -974,7 +982,8 @@ Required:
 - no unresolved blocking finding;
 - repository state reconciled.
 - approved Plan concurrency assessment and execution mode resolved;
-- shared-checkout writer coordination established by this Orchestrator before implementation dispatch.
+- shared-checkout writer coordination established by this Orchestrator before implementation dispatch;
+- Project Instructions Setup Phase 2 and any triggered refresh satisfied, with the approved instruction fingerprint current, under O16.6.
 
 Postconditions:
 
@@ -1961,6 +1970,12 @@ SDLC Portability Assessment (separate advisory mechanism; not a product lifecycl
 
 This is the explicit entry point to present when an initial assessment or reassessment is required. The Orchestrator must not invoke the Assessment Agent automatically.
 
+Project Instructions Setup (separate mechanism; Phase 1 before the first Requirement Analysis, Phase 2 before the first Implementation, refresh when triggered):
+
+    `.github/agents/project-instructions-setup.agent.md`
+
+This is the explicit entry point to present when a required phase or refresh is not satisfied. The Orchestrator must not invoke it automatically, and must not write the instruction file itself.
+
 Requirement Analysis:
 
     `.github/agents/requirement-analysis.agent.md`
@@ -2401,6 +2416,37 @@ If an assessment or reassessment is required but no applicable result is recorde
 
 ---
 
+## O16.6 Project Instructions Setup Preconditions
+
+On initial entry, and on every resume or re-entry, verify the following from durable records. Do not rely on file existence alone.
+
+A phase is satisfied by either of these:
+- **(a)** an `INSTRUCTIONS APPLIED` result
+- **(b)** a recorded waiver under `docs/ai/guidelines/PROJECT_INSTRUCTIONS_SETUP_GUIDELINES.md` §3.4 that names that phase and its preconditions and has not lapsed
+
+The file-content checks below apply only to (a).
+
+1. **Before the first Requirement Analysis:** Project Instructions Setup `PHASE-1` is satisfied for the current target and Master baseline.
+2. **Before the first Implementation:** `PHASE-2` is satisfied.
+   - For (a):
+     - The result is bound to the current approved Requirement and Plan.
+     - `.github/copilot-instructions.md` contains no `PENDING PHASE 2` marker.
+     - Its current SHA-256 equals the last approved fingerprint.
+   - For (b): the waiver names Phase 2 and the current approved Requirement and Plan.
+3. **Before any later Implementation:** no refresh trigger defined in that Guideline's §3.3 is outstanding.
+   - For (a), a fingerprint mismatch means the file changed outside the mechanism; report it for a human decision.
+   - For (b), any file change since the waiver lapses it.
+
+If any check fails, stop the affected transition and present `.github/agents/project-instructions-setup.agent.md` as the explicit, human-invoked entry point.
+- Do not invoke it automatically.
+- Do not author, edit, or approve the instruction file.
+- Do not infer a waiver.
+- Do not include `.github/copilot-instructions.md` in any feature change set or feature commit. It is committed only through the separate, instructions-only commit route in `SDLC_ARTIFACT_GOVERNANCE.md` §3.6.
+
+Human Instructions Approval is not Human Requirement Approval, Human Review Approval, Human Plan Approval, or Human Acceptance, and it is not Process Initiation Approval.
+
+---
+
 # O17. Main Orchestration Algorithm
 
 The Orchestrator must execute the following control loop.
@@ -2422,7 +2468,7 @@ When the user explicitly requests feature development, implementation, or an equ
 9. reconcile repository state with durable records;
 10. determine the next permitted process.
 
-Before the first or next affected process, apply O16.5 to establish initial-assessment or reassessment applicability and any required recorded human blocker disposition.
+Before the first or next affected process, apply O16.5 to establish initial-assessment or reassessment applicability and any required recorded human blocker disposition, then apply O16.6 for the Project Instructions Setup preconditions.
 
 If the request is ambiguous and the intended feature-development scope cannot be determined safely, ask for clarification.
 
@@ -2440,7 +2486,7 @@ Execute repeatedly. Apply the common O5.0 notification rule only immediately bef
 4. determine whether any artifact has become stale;
 5. determine whether previous process results remain applicable;
 6. determine the next permitted process;
-7. validate all process preconditions, including the applicable assessment/reassessment and conditional recorded-human-disposition checks in O16.5;
+7. validate all process preconditions, including the applicable assessment/reassessment and conditional recorded-human-disposition checks in O16.5 and the Project Instructions Setup checks in O16.6;
 8. if a formal Human Governance Gate is required:
    - prepare the required decision package;
    - stop;
@@ -2499,6 +2545,10 @@ Before invoking Implementation Agent, verify:
     AND
 
     No unresolved blocking finding exists
+
+    AND
+
+    Project Instructions Setup Phase 2 (and any triggered refresh) is satisfied under O16.6
 
     AND
 
@@ -2947,6 +2997,8 @@ Every governed process shown in these scenarios, including Finding Investigation
 
     User provides feature Requirement
             ↓
+    Project Instructions Setup Phase 1 satisfied (O16.6; first Requirement Analysis only)
+            ↓
     Determine Requirement Analysis
             ↓
     Process Initiation Approval
@@ -2972,6 +3024,8 @@ Every governed process shown in these scenarios, including Finding Investigation
     Human Review Approval
             ↓
     Human Plan Approval
+            ↓
+    Project Instructions Setup Phase 2 / refresh satisfied (O16.6)
             ↓
     Process Initiation Approval
             ↓

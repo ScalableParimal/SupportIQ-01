@@ -12,6 +12,9 @@ Human decisions:
 Additional context:
 [Optional additional context relevant to the requirement analysis]
 
+Project Instructions Setup precondition (PROJECT_INSTRUCTIONS_SETUP_GUIDELINES.md §9):
+[First Requirement Analysis for the target: the Phase 1 Setup result Work ID, location, and fingerprint (`INSTRUCTIONS APPLIED`), or the recorded waiver covering Phase 1; required before invocation. Later Requirement Analysis: NOT APPLICABLE (§9 defines no additional check).]
+
 ## Work Item Context (product work)
 
 - Canonical Work Item IDs and types: [IDs/types, or NOT APPLICABLE]

@@ -19,7 +19,7 @@ Use the following sources when available:
 
 1. Approved requirement — functional source of truth
 2. Approved implementation plan — implementation-scope source of truth
-3. Approved architecture and engineering guidelines — technical constraints
+3. Approved architecture and engineering guidelines — technical constraints, including the approved project instructions at `.github/copilot-instructions.md` (Project Instructions Setup). These rank below the approved Requirement and Plan, except designated mandatory team rules, which the Plan may only tighten.
 4. Actual repository — implementation source of truth
 5. Test results and other execution results — verification evidence
 

@@ -38,7 +38,12 @@ Before starting:
 3. Resolve the Requirement document identified by the Request.
 4. Resolve the applicable human decisions and additional context supplied by the Request.
 5. Confirm that the required source artifacts are accessible.
-6. If required information is unavailable or cannot be reliably resolved, stop and report the limitation.
+6. Confirm the Project Instructions Setup precondition in `docs/ai/guidelines/PROJECT_INSTRUCTIONS_SETUP_GUIDELINES.md` §9 from durable records, not from file existence.
+   - Before the target's first Requirement Analysis: Phase 1 is satisfied for the current target and Master baseline, by an `INSTRUCTIONS APPLIED` result or an unlapsed recorded waiver covering Phase 1.
+   - For any later Requirement Analysis: no additional Setup check applies under §9. Outstanding refresh triggers are enforced before Implementation.
+
+   If the precondition is not met, stop and present `.github/agents/project-instructions-setup.agent.md` as the explicit, human-invoked entry point. Do not invoke it.
+7. If required information is unavailable or cannot be reliably resolved, stop and report the limitation.
 
 ## 4. Execution Procedure
 

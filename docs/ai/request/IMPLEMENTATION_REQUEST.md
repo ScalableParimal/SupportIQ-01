@@ -18,6 +18,9 @@ Implement:
 Additional Context:
 [Optional implementation context, constraints, or evidence]
 
+Project Instructions Setup precondition (PROJECT_INSTRUCTIONS_SETUP_GUIDELINES.md §9):
+[First Implementation: the Phase 2 Setup result Work ID, location, and approved `.github/copilot-instructions.md` SHA-256 (`INSTRUCTIONS APPLIED`), or the recorded waiver naming Phase 2 and the current approved Requirement and Plan. Later Implementation: the latest applicable Setup result and approved SHA-256 or unlapsed waiver, and confirmation that no §3.3 refresh trigger is outstanding. Required before invocation.]
+
 Execution Context
 Feature ID: [Stable feature identifier]
 Attempt ID: [Unique invocation identifier]

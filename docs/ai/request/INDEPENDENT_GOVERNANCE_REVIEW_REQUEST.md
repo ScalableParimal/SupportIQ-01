@@ -6,7 +6,7 @@ Application result: [PATH, ID, SHA-256]
 Independent Verification result: [PATH, ID, SHA-256; MUST PASS]
 Current repository identity and state: [REPOSITORY, HEAD, BRANCH]
 Scope: [AFFECTED GOVERNANCE ARTIFACTS AND CONNECTED REFERENCES]
-Required criteria: Approved intent, exact scope, authority, human gates, 52-core boundary, seven mechanism groups, cross-document coherence, Master/non-Master effectivity.
+Required criteria: Approved intent, exact scope, authority, human gates, 52-core boundary, eight mechanism groups, cross-document coherence, Master/non-Master effectivity.
 Not authorized: Source/evaluated-input writes, approval, application, or Governance Audit. Publish only this reviewer's own records under section 33.1.
 
 Human stage-start instruction: [FRESH ATTRIBUTABLE REQUEST FOR THIS REVIEW INVOCATION]

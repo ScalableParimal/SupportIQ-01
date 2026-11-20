@@ -22,7 +22,7 @@ Before implementation begins, the following must be available:
 
 1. Approved requirement document.
 2. Approved implementation plan.
-3. Any explicitly approved technical decisions or constraints.
+3. Any explicitly approved technical decisions or constraints, including the approved project instructions at `.github/copilot-instructions.md` (Project Instructions Setup Phase 2 result or recorded waiver). Designated mandatory team rules in that file apply as stated, or as tightened by the approved Plan.
 4. The actual repository and its current state.
 
 If any required input is missing or its approval status is unclear, do not assume approval.
@@ -59,7 +59,8 @@ Do not:
 - expand the data model without approval,
 - introduce new frameworks or libraries without justification and approval where required,
 - refactor unrelated code,
-- change existing behavior unrelated to the requested slice.
+- change existing behavior unrelated to the requested slice,
+- modify `.github/copilot-instructions.md`, which changes only through Project Instructions Setup and is never part of a feature change set (`SDLC_ARTIFACT_GOVERNANCE.md` §3.6).
 
 A task may require small supporting changes in dependent code. Such changes are allowed only when they are necessary to complete the requested task and remain within the approved scope.
 

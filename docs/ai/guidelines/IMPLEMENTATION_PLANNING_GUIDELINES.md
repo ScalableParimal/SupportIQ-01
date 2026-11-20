@@ -48,6 +48,8 @@ AI Technical Recommendations
 
 AI recommendations must remain identifiable as recommendations unless explicitly approved.
 
+Treat the approved project instructions at `.github/copilot-instructions.md`, produced by Project Instructions Setup, as approved technical constraints. Where the Plan needs a different engineering choice, state the difference explicitly in the Plan. After Human Plan Approval, Project Instructions Setup Phase 2 reconciles the instructions with the approved Plan. A Plan may make the instructions' designated mandatory team rules stricter but must not weaken, waive, or omit them (`SDLC_ARTIFACT_GOVERNANCE.md` §3.6). To change one, request a Project Instructions Setup refresh; do not deviate in the Plan.
+
 Do not allow repository conventions to silently override an explicit approved requirement.
 
 If the requirement conflicts with the existing architecture or repository conventions, identify the conflict and propose the minimum necessary resolution for human review.

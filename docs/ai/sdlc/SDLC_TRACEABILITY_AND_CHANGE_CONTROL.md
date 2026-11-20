@@ -64,6 +64,8 @@ The fundamental relationship is:
        ↓
     Approved Implementation Plan
        ↓
+    Project Instructions Setup — Phase 2 (first Implementation; refresh when triggered)
+       ↓
     Implementation
        ↓
     Implementation Self-Check
@@ -295,6 +297,8 @@ The complete requirement-to-implementation chain is:
     Human Plan Approval
        ↓
     Approved Implementation Plan
+       ↓
+    Project Instructions Setup — Phase 2 (first Implementation; refresh when triggered)
        ↓
     Implementation
        ↓
@@ -988,6 +992,22 @@ Before reservation, search `docs/sdlc-records/governance/` and `docs/sdlc-record
 
 Once reserved, retain the exact Work ID across retries and lifecycle stages. Put it in each attempt, request, report, result, evidence manifest, and human-gate request/decision; every cross-stage handoff must reference the Work ID plus the source record identity, location, and fingerprint. Attempt, gate, and decision IDs remain separately generated timestamp-plus-UUID identities. Never derive a new Work ID from a changed title, branch, or attempt number. The existing Work ID `governance-amendment-applier-verifier-reviewer-readiness` is preserved as an already-established identity and is not regenerated under this prospective allocation rule.
 
+#### Project Instructions Setup Work ID allocation and record scope
+
+Project Instructions Setup (`SDLC_ARTIFACT_GOVERNANCE.md` §3.6) produces product-subject records under the adopted product root `docs/sdlc-records/product/`. Its owning scope is the target project as a whole, not a single feature. That root must already be adopted.
+
+**Work ID**
+- Each Setup run (`PHASE-1`, `PHASE-2`, or a `REFRESH`) uses its own Work ID unless it continues an already-authorized run.
+- Format: `instructions-setup-<uuid-v4>`, generated from a cryptographically secure UUIDv4 source and rendered lowercase with hyphens.
+- Collision-check the identifier against both persistence roots using the rule above.
+- Reserve it by the first no-overwrite publication of `docs/sdlc-records/product/<work-id>/attempts/<attempt-id>/attempt.json`.
+
+**Required references in each result**
+- the prior Setup result's Work ID, location, and fingerprint, if any
+- the Human Instructions Approval or waiver record that satisfies the phase
+
+Do not create a separate instructions registry or state artifact. The latest applicable Setup result, together with its approval or waiver record, establishes the current approved fingerprint.
+
 #### Governance amendment stage invocation and handoff
 
 Each governance-amendment stage is a separate actor invocation with its own pre-execution attempt record, explicitly supplied human stage-start instruction, and actor-owned report/result/evidence. Patch approval authorizes only the exact application described by that approval; it does not start the Application, Verification, Review, or Audit process and is not a Process Initiation response. The stages are: proposal preparation; exact Human Approval; Application; independent Verification; independent Review; complete Governance Audit; and, for Master changes only, separate prospective-baseline adoption. A human must explicitly initiate each process stage after reviewing the preceding handoff. Retries and restarts require a fresh stage-start instruction; no response is inferred, reused, or automatically propagated.
@@ -1050,6 +1070,10 @@ Findings, investigations, corrective decisions, and task-impact assessments rema
 
 Implementation-related records must identify repository identity, HEAD commit, branch as context, relevant tracked modifications and untracked files, and the relevant implementation scope. They must reference a path-and-content-fingerprint manifest sufficient to identify the implementation state being reported, verified, or reviewed, together with relevant execution environment and test context.
 
+Implementation Plan Verification, Implementation, Implementation Verification, and Implementation Review records must also bind the project instructions they used. Bind one of the following:
+- the path `.github/copilot-instructions.md`, its SHA-256, and the satisfying Setup result
+- the applicable recorded waiver
+
 HEAD or branch alone is insufficient for an uncommitted implementation. A fingerprint detects change but does not preserve lost content. Where recovery requires restoration, the actual necessary source, configuration, and evidence must also remain available through an authorized persistence or backup mechanism.
 
 Metadata and record-publication files must not themselves redefine the implementation verification scope or invalidate a result solely because execution bookkeeping changed.
@@ -1059,6 +1083,8 @@ Metadata and record-publication files must not themselves redefine the implement
 A gate request must identify the existing gate type, exact subject and version or implementation state, requested decision scope, applicable package and evidence, prerequisites, and requesting process or attempt.
 
 A decision record must preserve the actual supplied human response, attributable source, exact subject and scope, conditions, decision time where available, and original decision evidence. It may reference an explicitly superseded decision. Transcription does not create approval or acceptance.
+
+A Human Instructions Approval or waiver recorded by Project Instructions Setup (`SDLC_ARTIFACT_GOVERNANCE.md` §3.6) follows the same decision-record rules. It binds the exact instruction content and its SHA-256, is not a formal lifecycle gate, and does not substitute for any formal gate.
 
 Absence or ambiguity of decision evidence means the gate is not established as satisfied. Human Review Approval, Human Plan Approval, corrective-change approval, and Human Acceptance remain distinct and retain their existing meanings.
 
@@ -1088,7 +1114,7 @@ Resuming from a confirmed safe boundary may require restarting an incomplete pro
 
 #### Git, recovery scope, and retention
 
-Local publication is not a Git commit or remote push. Commit and Push retain their existing Human Acceptance precondition and require the applicable explicit authorization; no automatic publication to Git or a remote is authorized.
+Local publication is not a Git commit or remote push. Commit and Push retain their existing Human Acceptance precondition and require the applicable explicit authorization; no automatic publication to Git or a remote is authorized. The single exception is `.github/copilot-instructions.md`. It is never committed with product work. It is committed only through the separate, instructions-only commit route in `SDLC_ARTIFACT_GOVERNANCE.md` §3.6, which requires an `INSTRUCTIONS APPLIED` result, a committed blob matching the approved SHA-256, and a separate explicit, attributable commit authorization.
 
 Before Human Acceptance, records may persist locally under the approved convention. After Human Acceptance, the necessary records may accompany the accepted implementation through explicitly authorized Commit and Push. Acceptance itself performs neither action.
 
@@ -1282,6 +1308,16 @@ A Skill or Agent change must not be treated as a product Requirement, Implementa
 
 Where a Skill or Agent change materially affects governance authority or process behavior, the applicable governance change, verification, and remediation process must be followed.
 
+### Project Instructions Changes
+
+A new `INSTRUCTIONS APPLIED` fingerprint for `.github/copilot-instructions.md` is a change to approved engineering constraints. It is not a Requirement or Plan change. For each in-progress or completed downstream record bound to the prior fingerprint (section 30.1), identify the changed sections and evaluate whether they affect the record's evaluated scope:
+- a candidate or approved Implementation Plan and its Plan Verification
+- Implementation
+- Implementation Verification
+- Implementation Review
+
+A downstream result becomes stale only when a changed section affects its evaluated scope, for example a tightened mandatory team rule. Record that impact assessment, then route affected work through the ordinary verification or corrective path. A change made outside Project Instructions Setup is not an approved change. It is a precondition failure under the Setup Guideline.
+
 ---
 
 ## 34. Minimal Required Propagation
@@ -1311,6 +1347,10 @@ Requires the applicable Plan Verification and Human Plan Approval before impleme
 ### Requirement change
 
 Requires Requirement Analysis, complete Requirement Analysis Verification, Human Requirement Approval, and downstream plan evaluation.
+
+### Project instructions change
+
+Requires the section 33 impact assessment of records bound to the prior instruction fingerprint. Re-verify or re-review only where a changed section affects the evaluated scope. A tightened mandatory team rule that the current Plan or implementation no longer meets is handled as a finding through the corrective path.
 
 The required propagation must be determined by the applicable governed process.
 
@@ -1487,11 +1527,11 @@ The Master Governance source set for prospective source-baseline status consists
 
 **Candidate bytes are not approval.** Exact paths and SHA-256 fingerprints identify bytes only. A source set remains a candidate unless and until a separate, explicit, attributable Human decision adopts it under this section. Current repository bytes, a path, version label, timestamp, branch, commit, fingerprint, or partial approval lineage does not by itself establish approval, adoption, or an effective boundary. Preserve prior source versions as historical; where authentic evidence does not establish their approval or effective status, record that status as unknown. Do not infer prior approval or supersession.
 
-**Initial adoption of an unchanged inherited Master set.** When a target repository receives the exact three Master files without changing their bytes, the files remain candidate text until a complete Governance Audit in that target repository assesses them. Adoption requires the Audit result `CONSISTENT`, Critical, High, Medium, Low, Ambiguities, Missing Governance Controls, Unsupported Governance Controls, and Broken References each equal to zero, and all seven separately assessed mechanism groups complete with no unresolved issue. Only then may a separate explicit Human decision adopt the exact three paths and SHA-256 fingerprints as that target's prospective baseline, with target identity, baseline identity, scope, effective boundary, predecessor status, and resolvable Audit evidence. This no-change initial adoption does not fabricate an application or amendment record, does not adopt product persistence root, and does not bypass any separate approval or stage-start. If the candidate audit or any required assurance is incomplete or fails, the baseline remains unadopted.
+**Initial adoption of an unchanged inherited Master set.** When a target repository receives the exact three Master files without changing their bytes, the files remain candidate text until a complete Governance Audit in that target repository assesses them. Adoption requires the Audit result `CONSISTENT`, Critical, High, Medium, Low, Ambiguities, Missing Governance Controls, Unsupported Governance Controls, and Broken References each equal to zero, and all eight separately assessed mechanism groups complete with no unresolved issue. Only then may a separate explicit Human decision adopt the exact three paths and SHA-256 fingerprints as that target's prospective baseline, with target identity, baseline identity, scope, effective boundary, predecessor status, and resolvable Audit evidence. This no-change initial adoption does not fabricate an application or amendment record, does not adopt product persistence root, and does not bypass any separate approval or stage-start. If the candidate audit or any required assurance is incomplete or fails, the baseline remains unadopted.
 
 **Approval and exact application of a material Master change.** Each material proposed change to any of the three Master files requires its own explicit Human Approval before application. The approval must bind the exact patch or text, exact target path or paths, each target's base and expected-after SHA-256, scope and exclusions, and the application route. Approval authorizes only that bound change and does not itself establish application authority. If an already-authorized application actor is not demonstrably established, the approval record must explicitly designate a qualified actor and one-time scope. That actor must be distinct from the proposal preparer, the SDLC Process Orchestrator, and any Governance Remediation Agent barred from self-edit during its active cycle. The designated actor may apply only the approved change when every base fingerprint matches; any mismatch, additional change, or target deviation requires stopping and obtaining a new exact proposal and approval. No commit or push is authorized by this section. The standing Governance Amendment Application Agent may be the applier only after the mechanism is effective; it must remain distinct from the preparer, verifier, and reviewer. For this mechanism's initial establishment, the Human Approval record must designate the qualified one-time applier because the new Agent does not yet have effective authority.
 
-**Independent assurance and separate prospective adoption.** After exact authorized application, require independent governance verification and independent review; neither may be performed by the proposal preparer or applier. Then complete the full Governance Audit over all 52 core artifacts and separately assess all seven mandatory same-framework mechanism groups: Governance Audit, Governance Remediation, SDLC Process Orchestration, SDLC Portability Assessment, Governance Amendment Application, Independent Governance Verification, and Independent Governance Review. Do not add mechanism groups to the 52-core count. Effectiveness requires the exact result `CONSISTENT`; Critical, High, Medium, Low, Ambiguities, Missing Governance Controls, Unsupported Governance Controls, and Broken References must each equal zero; all seven groups must be assessed and have no unresolved issue. A failed, incomplete, unavailable, or unresolved gate prevents effectiveness. If any required gate fails or remains unresolved, stop; do not declare the change or a baseline effective. Only after all these gates succeed may a separate, explicit, attributable Human decision adopt the exact then-current paths and SHA-256 fingerprints of all three Master files as a new prospective baseline. The adoption record must bind a baseline identity, the attributable Human Approval, scope, effective boundary, predecessor status, and resolvable references to the exact authorized application, independent verification, independent review, and complete Governance Audit. The adoption decision is distinct from patch approval, application authority, verification, review, and Audit; none substitutes for another. No baseline is adopted by default or retroactively.
+**Independent assurance and separate prospective adoption.** After exact authorized application, require independent governance verification and independent review; neither may be performed by the proposal preparer or applier. Then complete the full Governance Audit over all 52 core artifacts and separately assess all eight mandatory same-framework mechanism groups: Governance Audit, Governance Remediation, SDLC Process Orchestration, SDLC Portability Assessment, Project Instructions Setup, Governance Amendment Application, Independent Governance Verification, and Independent Governance Review. Do not add mechanism groups to the 52-core count. Effectiveness requires the exact result `CONSISTENT`; Critical, High, Medium, Low, Ambiguities, Missing Governance Controls, Unsupported Governance Controls, and Broken References must each equal zero; all eight groups must be assessed and have no unresolved issue. A failed, incomplete, unavailable, or unresolved gate prevents effectiveness. If any required gate fails or remains unresolved, stop; do not declare the change or a baseline effective. Only after all these gates succeed may a separate, explicit, attributable Human decision adopt the exact then-current paths and SHA-256 fingerprints of all three Master files as a new prospective baseline. The adoption record must bind a baseline identity, the attributable Human Approval, scope, effective boundary, predecessor status, and resolvable references to the exact authorized application, independent verification, independent review, and complete Governance Audit. The adoption decision is distinct from patch approval, application authority, verification, review, and Audit; none substitutes for another. No baseline is adopted by default or retroactively.
 
 **Existing records and historical boundaries.** Record and link proposals, approvals, application evidence, assurance results, and any separate adoption decision using the existing governed process records and human-decision records under section 30.1 of this document and section 33.1 of `SDLC_ARTIFACT_GOVERNANCE.md`. This section creates no artifact category, gate category, schema, persistence root, process, or approval authority and does not replace or relax either publication or change-control requirements. A future baseline decision must not waive, cure, reclassify, or make retroactive claims about the original alarm `CANNOT VERIFY`, missing pre-write bytes, missing pre-write scope manifest, earlier verifier-ordering deviation, the main gap's blocked/inactive/no-further-process decision, or the separate unresolved referral/no-further-work decision. It does not authorize alarm integration, activation, operation, or any product change; those require a distinct later governed request and their own approvals and assurance.
 
@@ -1513,7 +1553,7 @@ The applicable framework manifest must identify the three Master Governance file
 
 The target must establish its own governance persistence root and, before product records or Portability Assessment, separately adopt its own product persistence root under section 30.1. A target-context Governance Audit must resolve and assess the exact externally bound framework artifacts and all required mechanisms against the target's recorded identity and scope; an audit or baseline decision from the framework repository does not establish target consistency or adoption. The applicable external Master baseline may be adopted only by a separate explicit Human decision after the target-context Audit and all required independent assurance pass. That decision must bind the exact full framework commit, all three Master fingerprints, the applicable artifact-manifest identity and fingerprint, the product identity/root, scope, effective boundary, predecessor status, and the target Audit/assurance records. An external framework baseline is not copied into the product repository by this route.
 
-After the target roots and external baseline are adopted, complete the separately authorized Portability Assessment and resolve its recommendation through the applicable Human decision before entering the product lifecycle. Portability Assessment remains read-only and advisory; it cannot adopt roots or a baseline, approve a product, or authorize implementation. The framework repository's own audit, the external source's approval history, and another product's records do not substitute for any target-specific gate.
+After the target roots and external baseline are adopted, complete the separately authorized Portability Assessment and resolve its recommendation through the applicable Human decision. Then complete Project Instructions Setup Phase 1 for the target (an `INSTRUCTIONS APPLIED` result or a recorded, scoped human waiver under `SDLC_ARTIFACT_GOVERNANCE.md` §3.6), and only then enter the product lifecycle. Project Instructions Setup Phase 2 must likewise be satisfied after the first Human Plan Approval and before the first Implementation. Portability Assessment remains read-only and advisory; it cannot adopt roots or a baseline, approve a product, or authorize implementation. The framework repository's own audit, the external source's approval history, and another product's records do not substitute for any target-specific gate.
 
 ### 43.4 Actor discovery, invocation, record ownership, and access boundaries
 

@@ -142,12 +142,13 @@ The numbered core SDLC Governance catalog remains exactly:
 
 Total: **52 core SDLC Governance artifacts**.
 
-The same-framework Governance Audit must also assess these seven separately reported mechanism groups:
+The same-framework Governance Audit must also assess these eight separately reported mechanism groups:
 
 - Governance Audit mechanism: `.github/skills/sdlc-governance-audit/SKILL.md` and `.github/agents/sdlc-governance-audit.agent.md`
 - Governance Remediation mechanism: `.github/agents/sdlc-governance-remediation.agent.md`
 - SDLC Process Orchestration mechanism: `.github/agents/sdlc-process-orchestrator.agent.md`
 - SDLC Portability Assessment mechanism: `.github/agents/portability-assessment.agent.md`, `.github/skills/portability-assessment/SKILL.md`, and its supporting Guideline, Prompt, and Request
+- Project Instructions Setup mechanism: `.github/agents/project-instructions-setup.agent.md`, `.github/skills/project-instructions-setup/SKILL.md`, and its supporting Guideline, Prompt, and Request
 - Governance Amendment Application mechanism: `.github/agents/governance-amendment-application.agent.md`, `.github/skills/governance-amendment-application/SKILL.md`, and its Guideline, Prompt, Request, Skill, and Agent
 - Independent Governance Verification mechanism: `.github/agents/independent-governance-verification.agent.md`, `.github/skills/independent-governance-verification/SKILL.md`, and its Guideline, Prompt, Request, Skill, and Agent
 - Independent Governance Review mechanism: `.github/agents/independent-governance-review.agent.md`, `.github/skills/independent-governance-review/SKILL.md`, and its Guideline, Prompt, Request, Skill, and Agent
@@ -369,7 +370,7 @@ The audit must include:
 - 10 SDLC Process Skills
 - 9 SDLC Process Agents
 
-Also assess and report the seven separately identified mechanism-alignment groups from §3.1. Do not add them to expected/found/audited core-artifact totals. The Governance Audit must remain read-only.
+Also assess and report the eight separately identified mechanism-alignment groups from §3.1. Do not add them to expected/found/audited core-artifact totals. The Governance Audit must remain read-only.
 
 Governance Control mechanisms are outside this 52-artifact SDLC Process scope.
 
@@ -426,6 +427,7 @@ Separately Reported Mechanism Alignment:
 - Governance Remediation mechanism: expected / found / assessed / result
 - SDLC Process Orchestration mechanism: expected / found / assessed / result
 - SDLC Portability Assessment mechanism: expected / found / assessed / result
+- Project Instructions Setup mechanism: expected / found / assessed / result
 - Governance Amendment Application mechanism: expected / found / assessed / result
 - Independent Governance Verification mechanism: expected / found / assessed / result
 - Independent Governance Review mechanism: expected / found / assessed / result
@@ -778,7 +780,7 @@ The repeat audit must cover:
 - 10 SDLC Process Skills
 - 9 SDLC Process Agents
 
-Also assess and report the seven separately identified mechanism-alignment groups from §3.1. Do not add them to expected/found/audited core-artifact totals. The Governance Audit must remain read-only.
+Also assess and report the eight separately identified mechanism-alignment groups from §3.1. Do not add them to expected/found/audited core-artifact totals. The Governance Audit must remain read-only.
 
 Do not exclude Skills or SDLC Process Agents merely because the current finding originated in another governance artifact.
 
@@ -1253,6 +1255,7 @@ Separately Reported Mechanism Alignment
 - Governance Remediation mechanism: expected / found / assessed / result
 - SDLC Process Orchestration mechanism: expected / found / assessed / result
 - SDLC Portability Assessment mechanism: expected / found / assessed / result
+- Project Instructions Setup mechanism: expected / found / assessed / result
 - Governance Amendment Application mechanism: expected / found / assessed / result
 - Independent Governance Verification mechanism: expected / found / assessed / result
 - Independent Governance Review mechanism: expected / found / assessed / result

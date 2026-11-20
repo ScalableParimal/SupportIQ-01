@@ -68,9 +68,33 @@ The bootstrap authorization permits only the first actor-owned invocation public
 
 Before a new target project begins its first SDLC activity under this framework, the Portability Assessment mechanism defined in `SDLC_ARTIFACT_GOVERNANCE.md` §3.4 must complete an assessment against identified source-framework and target-project baselines. The assessment is advisory: it reports evidence, classifications, adaptations, uncertainties, and any recommended possible blocking condition. A human authorized for that project must explicitly decide whether each recommended possible blocking condition applies to that project. The Assessment Agent must neither make that decision nor automatically enforce a block. Record the human decision and rationale with assessment evidence; do not label it Human Requirement Approval or Human Acceptance. Until the human decision about a recommended possible blocker is recorded, the first SDLC activity (or, on reassessment, the next affected SDLC activity) does not start. This decision does not approve a product Requirement or Implementation Plan.
 
-Reassess on an explicit human request and after a material change that can affect prior assessment applicability. Material changes include applicable Master/Governance Assessment artifacts or invocation/approval/traceability rules; target-project requirements or scope; architecture, technology stack, repositories/workspace boundaries or project instructions; integrations, security/access controls, CI/test/deployment/operational context; or other declared assessment inputs. The assessment Guideline defines evidence-based reuse and affected-dimension reassessment. Record changed source/target identity and fingerprints; do not reuse a prior conclusion where its scope, inputs, or applicability changed. Do not create unconditional repeated execution or automatic Agent invocation.
+Reassess on an explicit human request and after a material change that can affect prior assessment applicability. Material changes include applicable Master/Governance Assessment artifacts or invocation/approval/traceability rules; target-project requirements or scope; architecture, technology stack, repositories/workspace boundaries or project instructions changed outside Project Instructions Setup; integrations, security/access controls, CI/test/deployment/operational context; or other declared assessment inputs. A write governed by Project Instructions Setup is not itself a material change; it triggers reassessment only when it reflects a change to another listed dimension (for example, the stack, architecture, or repository boundaries). The assessment Guideline defines evidence-based reuse and affected-dimension reassessment. Record changed source/target identity and fingerprints; do not reuse a prior conclusion where its scope, inputs, or applicability changed. Do not create unconditional repeated execution or automatic Agent invocation.
 
 This entry control is part of the existing lifecycle, not a parallel lifecycle. Ordinary lifecycle stages and approval authorities remain unchanged.
+
+### Project Instructions Setup entry and refresh
+
+Every target project must have a current, human-approved `.github/copilot-instructions.md` before governed work depends on it. The Project Instructions Setup mechanism, defined in `SDLC_ARTIFACT_GOVERNANCE.md` §3.6, generates the file through an interactive, evidence-prefilled questionnaire. The authorized human answers the questionnaire and approves the exact content, so no ad-hoc prompt is needed.
+
+- **Phase 1 (baseline):** runs after the Portability Assessment and its recorded blocker dispositions, and before the first Requirement Analysis.
+- **Phase 2 (engineering finalization):** runs after the first Human Plan Approval and before the first Implementation.
+- **Refresh:** runs on the triggers in the Setup Guideline.
+
+The Setup Agent writes only that file plus its own records under the adopted product root, and it writes the file only after an explicit, attributable Human Instructions Approval of the exact content and its SHA-256. That approval is distinct from Human Requirement Approval, Human Review Approval, Human Plan Approval, Human Acceptance, and Process Initiation Approval.
+
+A phase is satisfied only by a recorded `INSTRUCTIONS APPLIED` result or a recorded, scoped human waiver as defined in `SDLC_ARTIFACT_GOVERNANCE.md` §3.6. Until the applicable phase is satisfied, the dependent stage (Requirement Analysis for Phase 1, Implementation for Phase 2) does not start.
+
+The approved instructions rank below the Masters, the approved Requirement, and the approved Plan. The exception is the designated mandatory team rules, which a Plan may tighten but not weaken. The instructions create no approval authority. The file changes only through Project Instructions Setup and is committed only through the separate, instructions-only commit route in `SDLC_ARTIFACT_GOVERNANCE.md` §3.6. It is never part of a feature change set.
+
+The onboarding and lifecycle order is:
+
+    Governance-root bootstrap and complete Governance Audit
+            ↓
+    Product-root adoption and Master-baseline adoption
+            ↓
+    Portability Assessment and recorded blocker dispositions
+            ↓
+    Project Instructions Setup — Phase 1 (baseline)
 
 The standard lifecycle is:
 
@@ -95,6 +119,8 @@ The standard lifecycle is:
     Human Review Approval
             ↓
     Human Plan Approval
+            ↓
+    Project Instructions Setup — Phase 2 (first Implementation; refresh when triggered)
             ↓
     Implementation
             ↓
@@ -314,7 +340,7 @@ AI must not claim Human Acceptance.
 
 ## 10. Commit and Push
 
-Commit and Push occur only after the required Human Acceptance gate has been satisfied.
+Commit and Push occur only after the required Human Acceptance gate has been satisfied. The single exception is the separate, instructions-only commit of `.github/copilot-instructions.md` defined in `SDLC_ARTIFACT_GOVERNANCE.md` §3.6. That commit requires an `INSTRUCTIONS APPLIED` result and a separate, explicit commit authorization, and it never contains product implementation.
 
 The committed implementation must correspond to the accepted implementation state.
 
@@ -751,6 +777,17 @@ This mechanism is outside—not an addition to—the 52-core catalog:
 - Agent/entry point: `.github/agents/portability-assessment.agent.md`
 
 These references connect the entry point to its governing procedure and invocation inputs. The separate mechanism is governed by section 3.4 of `SDLC_ARTIFACT_GOVERNANCE.md`; the fixed 52-core counts above are unchanged.
+
+### Separately Reported Project Instructions Setup Mechanism
+
+This mechanism is outside the 52-core catalog. It is not an addition to that catalog. Its five artifacts are:
+- Guideline: `docs/ai/guidelines/PROJECT_INSTRUCTIONS_SETUP_GUIDELINES.md`
+- Prompt: `docs/ai/prompts/PROJECT_INSTRUCTIONS_SETUP_PROMPT.md`
+- Request: `docs/ai/request/PROJECT_INSTRUCTIONS_SETUP_REQUEST.md`
+- Skill: `.github/skills/project-instructions-setup/SKILL.md`
+- Agent/entry point: `.github/agents/project-instructions-setup.agent.md`
+
+The mechanism is governed by section 3.6 of `SDLC_ARTIFACT_GOVERNANCE.md`. Its output is the target project's `.github/copilot-instructions.md`. That file is a project engineering-instruction artifact, not a governance artifact, and it has no approval authority. The fixed 52-core counts above are unchanged.
 
 ---
 

@@ -5,7 +5,7 @@ Human Approval: [RECORD PATH/ID]
 Application result: [PATH, ID, SHA-256]
 Current repository identity and state: [REPOSITORY, HEAD, BRANCH]
 Targets and approved base/after fingerprints: [LIST]
-Required checks: Approval binding; exact path/content; base and after hashes; no unauthorized changes; cross-document consistency; scope and authority boundaries; seven mechanism groups; Master/non-Master effectivity rule.
+Required checks: Approval binding; exact path/content; base and after hashes; no unauthorized changes; cross-document consistency; scope and authority boundaries; eight mechanism groups; Master/non-Master effectivity rule.
 Not authorized: Source/evaluated-input writes, approval, review, application, or Audit. Publish only this verifier's own records under section 33.1.
 
 Human stage-start instruction: [FRESH ATTRIBUTABLE REQUEST FOR THIS VERIFICATION INVOCATION]

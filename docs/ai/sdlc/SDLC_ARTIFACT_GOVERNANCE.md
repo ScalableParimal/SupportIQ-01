@@ -142,9 +142,80 @@ For this initial route, “qualified” means designated by Human Approval for t
 
 The Verification Agent independently and read-only checks approval-to-application identity, exact paths and bytes, base/after fingerprints, absence of unauthorized changes, and cross-artifact consistency. The Review Agent independently and read-only evaluates governance correctness, authority, scope, lifecycle, human gates, and assurance adequacy. The actors must be distinct from the proposal preparer and applier and from each other. Each publishes a separate evidence-bound result; neither approves, applies, or accepts a change.
 
-No role gains authority from its name, Skill, Agent capability, or successful output. Only explicit Human Approval authorizes the exact application. A governance amendment becomes effective only after authorized application, passing independent Verification and Review, and a complete Audit that reports `CONSISTENT`, all required counts at zero, and all seven mechanism groups assessed without unresolved issues. A Master change additionally requires separate prospective-baseline adoption after those gates.
+No role gains authority from its name, Skill, Agent capability, or successful output. Only explicit Human Approval authorizes the exact application. A governance amendment becomes effective only after authorized application, passing independent Verification and Review, and a complete Audit that reports `CONSISTENT`, all required counts at zero, and all eight mechanism groups assessed without unresolved issues. A Master change additionally requires separate prospective-baseline adoption after those gates.
 
 Runtime capability and actor-boundary contract: an Agent definition, name, Skill, or available tool does not establish effective authority or executable capability. Before each role invocation, its actor must inspect the current runtime tool declarations and permission context and record the capability evidence in its own attempt. Application requires repository reads, SHA-256 computation, path/status and exact-content checks, exact writes to only the approval-bound target paths, post-write reads and hashes, and publication to its own authorized record scope. Verification and Review require repository/evidence reads, SHA-256 computation, their specified read-only check execution, and publication to their own authorized record scopes. All three roles must confirm that the Work ID scope and record output location are authorized and that publication is available before proceeding. Confirmation may use only non-mutating read/hash/check operations and the authorized record publisher. Record declared and observed capabilities separately. If any required capability, identity, permission, or publication path is unavailable or cannot be verified, return `CANNOT COMPLETE` before source action; no success result or effectiveness claim is permitted. Application must preflight every base before the first write and read back every target afterward, confirming exact file identity and expected-after hash. Verification and Review must independently publish their own integrity-bound reports and evidence. Each stage is separately and freshly human-initiated; exact patch approval is not stage initiation, and no role may automatically initiate another stage.
+
+---
+
+### 3.6 Project Instructions Setup Mechanism
+
+The Project Instructions Setup is a separately reported, same-framework mechanism. It produces and maintains the target project's approved project engineering instructions at `.github/copilot-instructions.md`.
+- It is not a separate framework.
+- It is not added to the 52-core catalog.
+- It does not create a product Requirement, an Implementation Plan, or a parallel approval lifecycle.
+
+Its connected artifacts are the Project Instructions Setup Guideline, Prompt, Request, Skill, and Agent listed in section 24 of `SDLC_GOVERNANCE.md`. The Agent is the explicit, human-invoked entry point.
+
+The mechanism runs in these situations:
+- **Phase 1:** at onboarding, after the Portability Assessment and its recorded blocker dispositions, and before the first Requirement Analysis.
+- **Phase 2:** after the first Human Plan Approval and before the first Implementation.
+- **Refresh:** on the triggers its Guideline defines.
+
+It collects decisions through an interactive, evidence-prefilled questionnaire covering:
+- governance precedence
+- repository layout
+- requirement traceability
+- backend, database, and frontend standards
+- testing and quality gates
+- deployment and runtime
+- collaboration guardrails
+
+The authorized human for the target project answers the questionnaire and approves the exact content and SHA-256 through Human Instructions Approval. That recorded human decision is distinct from Human Requirement Approval, Human Review Approval, Human Plan Approval, and Human Acceptance, and it substitutes for none of them. It is also not Process Initiation Approval: an Orchestrator interlock response neither approves instruction content nor satisfies a Setup phase.
+
+The actor may write only two things:
+- `.github/copilot-instructions.md`, after approval, with base-hash preflight and readback verification
+- its own records under the adopted product root
+
+The actor must not:
+- modify governance artifacts, Requirements, Plans, source, tests, CI, or configuration
+- commit or push
+- invoke other Agents
+- self-approve
+
+**Precedence and mandatory team rules.** The approved instructions rank below the three Masters, the current approved Requirement, and the current approved Implementation Plan. They create no approval, gate, or governance authority.
+
+One exception applies: **mandatory team rules**. These are instruction rules that the Human Instructions Approval explicitly designates as mandatory and lists in the file's precedence section. Examples are a minimum line and branch coverage threshold, required requirement-ID test tagging, and stop gates.
+- An Implementation Plan may make a mandatory team rule stricter. It must not weaken, waive, or omit one.
+- A candidate Plan that would weaken one has a Plan Verification `Architecture Conflict` finding, routed through the ordinary finding and corrective path.
+- Only a Project Instructions Setup refresh, with a new Human Instructions Approval, may change a mandatory team rule.
+- Mandatory team rules still rank below the Masters and the approved Requirement. They cannot create, remove, or redefine an approval, gate, or governance rule.
+
+A conflict between an approved Plan and any other instruction is recorded for human decision. It is never resolved by changing the Plan outside Corrective Change control.
+
+**Change control and commit route.** `.github/copilot-instructions.md` changes only through Project Instructions Setup.
+- No other process may edit it, including Implementation, Corrective Change, and Requirement Update. A needed change is routed as a Setup refresh.
+- The file is excluded from every feature or product change set, and Human Acceptance of product work does not cover it.
+
+After an `INSTRUCTIONS APPLIED` result, the authorized human may commit the file only through a separate, instructions-only commit:
+- The commit contains only `.github/copilot-instructions.md` and, where authorized, the Setup actor's own records.
+- Its committed blob must hash to the approved SHA-256.
+- The commit message must reference the Setup Work ID and approved fingerprint.
+- It requires a separate, explicit, attributable commit authorization. Human Instructions Approval alone does not authorize a commit or push, and no AI actor commits or pushes automatically.
+
+**Phase satisfaction and waiver.** Each phase precondition is satisfied only by one of these:
+- an `INSTRUCTIONS APPLIED` result
+- a recorded, scoped human waiver
+
+The waiver must be explicit and attributable and must name the following:
+- the phase or refresh it covers
+- the preconditions it covers
+- its rationale
+- its lapse condition
+
+A waiver lapses at its stated expiry, at the next refresh trigger, or when the instruction file changes after the waiver is recorded, whichever comes first. A waiver approves no file content. The file-content conditions (no pending markers, current fingerprint equal to the approved fingerprint) apply only to an `INSTRUCTIONS APPLIED` result.
+
+Governance Audit assesses this mechanism and its integration separately from the 52 core. Audit does not assess the target project's instruction content.
 
 ## 4. Artifact Authority Model
 
@@ -168,9 +239,10 @@ The following authority model applies:
 | Corrective Change Decision & Plan Update | Governed AI recommendation subject to required Human Approval |
 | Human Approval | Human authority |
 | Human Acceptance | Human authority |
-| Commit / Push | Repository change evidence after required acceptance |
+| Commit / Push | Repository change evidence after required acceptance (the instructions-only commit in section 3.6 instead requires `INSTRUCTIONS APPLIED` and separate commit authorization) |
 | SDLC Process Skill | Governed reusable AI execution procedure |
 | SDLC Process Agent | Governed AI execution boundary and process entry point |
+| Approved Project Instructions (`.github/copilot-instructions.md`) | Human Instructions Approval of AI-proposed content; subordinate to the Masters and the approved Requirement, and to the approved Plan except for designated mandatory team rules, which a Plan may tighten but not weaken (section 3.6) |
 
 ### 4.1 Skill Authority
 
@@ -796,7 +868,7 @@ Commit / Push provides repository history evidence of the accepted implementatio
 
 ### 22.2 Preconditions
 
-Commit / Push occur only after the required Human Acceptance gate.
+Commit / Push occur only after the required Human Acceptance gate. The single exception is the separate, instructions-only commit of `.github/copilot-instructions.md` defined in section 3.6.
 
 ### 22.3 Authority
 
@@ -973,6 +1045,8 @@ The primary artifact relationship is:
        ↓
     Human Plan Approval
        ↓
+    Project Instructions Setup — Phase 2 (first Implementation; refresh when triggered)
+       ↓
     Implementation
        ↓
     Implementation Self-Check
@@ -1140,7 +1214,7 @@ Where applicable, the following relationships must be traceable:
 | Finding Investigation | Finding + Affected Artifact |
 | Corrective Change Decision | Finding Investigation + Affected Artifact + Applicable Approved Artifacts |
 | Human Acceptance | Implementation + Verification + Review |
-| Commit / Push | Accepted Implementation |
+| Commit / Push | Accepted Implementation (or, for the instructions-only commit in section 3.6, the `INSTRUCTIONS APPLIED` result and approved fingerprint) |
 | SDLC Process Skill | Applicable Master Governance + Guideline + Prompt + Request + Governed SDLC Process |
 | SDLC Process Agent | Applicable Master Governance + Guideline + Prompt + Request + SDLC Process Skill + Governed SDLC Process |
 
@@ -1193,7 +1267,7 @@ The first bootstrap attempt must reference the actual Human decision evidence by
 
 This provision clarifies the application of the existing publication boundary to the first-use condition. It creates no new record category, persistence root, process actor, lifecycle stage, approval authority, or general exception to this section. All ordinary publication, immutability, evidence, and actor-separation requirements remain in force.
 
-A process actor may publish a request for an existing required human gate associated with its own handoff. AI may persist a human response only when explicitly supplied or explicitly authorized for transcription, preserving its actual wording, attributable source, subject, scope, conditions, and original evidence. AI must not create, revise, infer, or substitute a substantive human decision.
+A process actor may publish a request for an existing required human gate associated with its own handoff. The Project Instructions Setup actor may likewise publish its own Human Instructions Approval or waiver request (section 3.6). That request is a recorded human-decision request, not a formal lifecycle gate. AI may persist a human response only when explicitly supplied or explicitly authorized for transcription, preserving its actual wording, attributable source, subject, scope, conditions, and original evidence. AI must not create, revise, infer, or substitute a substantive human decision.
 
 When authorized under the same Governance Framework, the SDLC Process Orchestrator may publish only its own orchestration invocation metadata, checkpoints, report, result bindings, evidence, and Process Initiation interlock request/response within its designated attempt scope and the existing section 30.1 persistence contract. The interlock request and actual supplied response are invocation-authorization metadata for that Orchestrator attempt, not a formal human-gate request or decision; they must not be recorded as Human Requirement Approval, Human Review Approval, Human Plan Approval, Corrective Change Approval, or Human Acceptance. Formal human-gate requests and decisions remain in the existing human-gates records and retain their existing meanings. The Orchestrator may link to, but must not publish, substitute, or alter, another process actor's report/result or a substantive human decision. Any response transcription must preserve the actual supplied wording, attributable source, subject, scope, conditions, and available time. This clarification creates no new record category or persistence convention.
 

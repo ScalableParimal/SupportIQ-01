@@ -213,6 +213,12 @@ API
 
 unless that architectural decision has been explicitly approved.
 
+Also verify the plan against the approved project instructions at `.github/copilot-instructions.md`.
+- The plan must meet, and may only tighten, every designated mandatory team rule (`SDLC_ARTIFACT_GOVERNANCE.md` §3.6), for example the coverage threshold, requirement-ID test tagging, and stop gates.
+- A plan that weakens, waives, or omits a mandatory team rule is an `Architecture Conflict` finding.
+- Record a difference from any other instruction as stated in the plan; that difference is not itself a finding.
+- Record the instruction path and SHA-256 that were verified against, or the applicable waiver.
+
 ---
 
 ### 6.4 Task Completeness

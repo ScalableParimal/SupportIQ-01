@@ -39,6 +39,13 @@ Before modifying the repository:
 6. Resolve the implementation slice requested by the user.
 7. Inspect the relevant current repository state.
 8. Confirm that the required implementation inputs are available.
+9. Confirm the Project Instructions Setup precondition in `docs/ai/guidelines/PROJECT_INSTRUCTIONS_SETUP_GUIDELINES.md` §9 from durable records.
+   - **Before the first Implementation**, Phase 2 must be satisfied, in one of two ways:
+     - An `INSTRUCTIONS APPLIED` result bound to the current approved Requirement and Plan, with no `PENDING PHASE 2` marker, and with the current `.github/copilot-instructions.md` SHA-256 equal to the approved fingerprint.
+     - An unlapsed recorded waiver naming Phase 2 and the current approved Requirement and Plan.
+   - **For any later Implementation**, no refresh trigger in that Guideline's §3.3 may be outstanding. In addition, either the current SHA-256 equals the last approved fingerprint, or the applicable recorded waiver has not lapsed.
+
+   If the precondition is not met, stop and present `.github/agents/project-instructions-setup.agent.md` as the explicit, human-invoked entry point. Do not invoke it.
 
 Do not begin implementation if required approval or authoritative artifacts cannot be established.
 
@@ -103,6 +110,8 @@ It may:
 - make other implementation changes explicitly required by the approved plan.
 
 It must not modify the approved Requirement or approved Implementation Plan as an informal part of implementation.
+
+It must not modify `.github/copilot-instructions.md`. That file changes only through Project Instructions Setup and is never part of a feature change set (`SDLC_ARTIFACT_GOVERNANCE.md` §3.6). Route a needed instruction change as a Setup refresh.
 
 The restrictions in this section do not prohibit publication of this process's own governed output records. Follow section 33.1 of SDLC_ARTIFACT_GOVERNANCE.md and section 30.1 of SDLC_TRACEABILITY_AND_CHANGE_CONTROL.md within the explicitly designated record scope. This limited permission covers the process's own invocation metadata, checkpoints, required report, result bindings, and permitted evidence or gate records; it does not permit changes to approved upstream artifacts, another process's records, or substantive human decisions. Published final records must not be edited in place. Establish required execution context before starting and publish the terminal record only when its recorded termination or completion is established. All other write, process, independence, approval, and acceptance restrictions remain in force.
 
